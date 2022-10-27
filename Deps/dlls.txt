@@ -1,0 +1,5 @@
+0Harmony.dll
+Assembly-CSharp.dll
+Assembly-CSharp-firstpass.dll
+UnityEngine.CoreModule.dll
+UnityEngine.CrashReportingModule.dll
