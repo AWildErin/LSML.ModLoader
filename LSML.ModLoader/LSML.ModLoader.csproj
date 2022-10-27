@@ -55,12 +55,6 @@
     <Reference Include="UnityEngine.CrashReportingModule">
       <HintPath>..\Deps\UnityEngine.CrashReportingModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityExplorer.STANDALONE.Mono">
-      <HintPath>..\Deps\UnityExplorer.STANDALONE.Mono.dll</HintPath>
-    </Reference>
-    <Reference Include="UniverseLib.Mono">
-      <HintPath>..\Deps\UniverseLib.Mono.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ModLoader.cs" />

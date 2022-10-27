@@ -40,6 +40,22 @@ namespace LSML.Patcher
 			if (type == null)
 				return false;
 
+			// Create an awake method so we can fire stuff as soon as it's made.
+			{
+				MethodDefinition awake = new MethodDefinition(
+					"Awake",
+					Mono.Cecil.MethodAttributes.Private,
+					module.TypeSystem.Void);
+				ILProcessor ilp = awake.Body.GetILProcessor();
+
+				MethodReference asmLoadFunc = module.ImportReference(typeof(Assembly).GetMethod("LoadFrom", new[] { typeof(string) }));
+				string modLoaderAsmPath = Path.Combine("LandlordsSuper_Data\\Managed\\", "LSML.ModLoader.dll");
+				AssemblyHelper.LoadAssemblyInstruction(ilp, asmLoadFunc, modLoaderAsmPath);
+
+				awake.Body.Instructions.Add(Instruction.Create(OpCodes.Ret));
+				type.Methods.Insert(0, awake);
+			}
+
 			// VHSGo is called once, and fully plays even when we skip.
 			var method = type.Methods.Where(x => x.Name == "VHSGo").First();
 			if (method == null)
@@ -47,9 +63,6 @@ namespace LSML.Patcher
 
 			{
 				ILProcessor ilp = method.Body.GetILProcessor();
-				MethodReference asmLoadFunc = module.ImportReference(typeof(Assembly).GetMethod("LoadFrom", new[] { typeof(string) }));
-				string modLoaderAsmPath = Path.Combine("LandlordsSuper_Data\\Managed\\", "LSML.ModLoader.dll");
-				var modLoaderInstruction = AssemblyHelper.LoadAssemblyInstruction(ilp, asmLoadFunc, modLoaderAsmPath);
 
 				MethodReference cbs = module.ImportReference(typeof(ModLoader.ModLoader).GetMethod("LoadModLoader"));
 				method.Body.Instructions.Insert(0, ilp.Create(OpCodes.Call, cbs));
