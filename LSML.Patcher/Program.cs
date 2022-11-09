@@ -49,7 +49,7 @@ namespace LSML.Patcher
 				ILProcessor ilp = awake.Body.GetILProcessor();
 
 				MethodReference asmLoadFunc = module.ImportReference(typeof(Assembly).GetMethod("LoadFrom", new[] { typeof(string) }));
-				string modLoaderAsmPath = Path.Combine("LandlordsSuper_Data\\Managed\\", "LSML.ModLoader.dll");
+				string modLoaderAsmPath = Path.Combine("LSML_Data\\Managed\\", "LSML.ModLoader.dll");
 				AssemblyHelper.LoadAssemblyInstruction(ilp, asmLoadFunc, modLoaderAsmPath);
 
 				awake.Body.Instructions.Add(Instruction.Create(OpCodes.Ret));

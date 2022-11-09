@@ -68,9 +68,9 @@
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>
-  <Target Name="CopyDLLs" Condition="Exists('D:\Games\Games\Landlord%27s Super\LandlordsSuper_Data\Managed')" AfterTargets="Build">
+  <Target Name="CopyDLLs" Condition="Exists('D:\Games\Games\Landlord%27s Super\LSML_Data\Managed')" AfterTargets="Build">
     <Message Text="Executing CopyDLLs task" Importance="High" />
-    <Copy SourceFiles="$(TargetDir)$(ProjectName).dll;$(TargetDir)$(ProjectName).pdb" DestinationFolder="D:\Games\Games\Landlord's Super\LandlordsSuper_Data\Managed" />
+    <Copy SourceFiles="$(TargetDir)$(ProjectName).dll;$(TargetDir)$(ProjectName).pdb" DestinationFolder="D:\Games\Games\Landlord's Super\LSML_Data\Managed" />
     <Message Text="Copied build files" Importance="High" />
   </Target>
 </Project>
